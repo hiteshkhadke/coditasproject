@@ -1,6 +1,36 @@
-<div fxLayoutAlign="center">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="User Search" >
-  </mat-form-field>
-  
+<form action="" class="search-form">
+  <div fxLayoutAlign="center">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="User Search" [(ngModel)]="username" name="username" (keyup)="findProfile()">
+    </mat-form-field>
+
+  </div>
+</form>
+<div fxLayoutAlign="center" *ngIf="profile">
+  <mat-card>
+    <div fxLayout="row">
+      <div>
+        <img style="border-radius: 50%; width:100px;" src="{{profile.avatar_url}}" alt="Profile Image">
+      </div>
+      <div fxLayout="column">
+        <div>
+          <span>{{ profile.name }}</span>
+        </div>
+        <div>
+          <span>Profile Url : {{ profile.html_url }}</span>
+        </div>
+        <div fxFlexOffset="50px">
+          <button mat-stroked-button (click)="findRepository()">Collapse</button>
+        </div>
+        <div class="panel-body" *ngFor="let repo of repos">
+            <span class="clearfix">
+              {{repo.name}}
+            </span>
+            <span>{{repo.description}}</span>
+          </div>
+      </div>
+    </div>
+
+
+  </mat-card>
 </div>

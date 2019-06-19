@@ -17,4 +17,13 @@ export class ProfileSearchService {
   	return this.http.get("https://api.github.com/users/" + this.username);
   	
   }
+  getProfileRepos(){
+  	return this.http.get("https://api.github.com/users/" + this.username + "/repos");
+  	
+  }
+
+
+  updateProfile(username:string){
+  	this.username = username;
+  }
 }
