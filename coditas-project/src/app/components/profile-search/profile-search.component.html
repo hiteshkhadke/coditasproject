@@ -1,33 +1,35 @@
 <form action="" class="search-form">
   <div fxLayoutAlign="center">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="User Search" [(ngModel)]="username" name="username" (keyup)="findProfile()">
+      <input matInput placeholder="User Search" [(ngModel)]="username" name="username">
     </mat-form-field>
-
+    <div fxFlexOffset="20px" style="margin-top: 10px">
+      <button mat-stroked-button (click)="findProfile()">Search</button>
+    </div>
   </div>
 </form>
-<div fxLayoutAlign="center" *ngIf="profile">
-  <mat-card>
+<div fxLayoutAlign="center" *ngFor="let profileItem of profileItemList">
+  <mat-card style="margin-top: 30px">
     <div fxLayout="row">
       <div>
-        <img style="border-radius: 50%; width:100px;" src="{{profile.avatar_url}}" alt="Profile Image">
+        <img style="border-radius: 50%; width:100px;" src="{{profileItem.avatar_url}}" alt="Profile Image">
       </div>
       <div fxLayout="column">
         <div>
-          <span>{{ profile.name }}</span>
+          <span>{{ profileItem.login }}</span>
         </div>
         <div>
-          <span>Profile Url : {{ profile.html_url }}</span>
+          <span>Profile Url : {{ profileItem.html_url }}</span>
         </div>
         <div fxFlexOffset="50px">
-          <button mat-stroked-button (click)="findRepository()">Collapse</button>
+          <button mat-stroked-button (click)="findRepository(profileItem.login)">Collapse</button>
         </div>
         <div class="panel-body" *ngFor="let repo of repos">
-            <span class="clearfix">
-              {{repo.name}}
-            </span>
-            <span>{{repo.description}}</span>
-          </div>
+          <span class="clearfix" style="margin: 8px">
+            {{repo.name}}
+          </span>
+          <span style="margin: 20px">{{repo.language}}</span>
+        </div>
       </div>
     </div>
 

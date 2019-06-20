@@ -14,11 +14,11 @@ export class ProfileSearchService {
    }
 
    getProfileInfo(){
-  	return this.http.get("https://api.github.com/users/" + this.username);
+  	return this.http.get("https://api.github.com/search/users?q=" + this.username);
   	
   }
-  getProfileRepos(){
-  	return this.http.get("https://api.github.com/users/" + this.username + "/repos");
+  getProfileRepos(userName){
+  	return this.http.get("https://api.github.com/users/" + userName + "/repos");
   	
   }
 

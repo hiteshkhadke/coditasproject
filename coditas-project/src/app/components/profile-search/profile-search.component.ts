@@ -10,6 +10,7 @@ export class ProfileSearchComponent implements OnInit {
   profile : any;
   username:string;
   repos: any;
+  profileItemList = [];
 
 
   constructor(private profileSearchService : ProfileSearchService) {
@@ -23,11 +24,15 @@ export class ProfileSearchComponent implements OnInit {
     this.profileSearchService.getProfileInfo().subscribe(profile => {
       console.log(profile);
       this.profile = profile;
+
+      this.profile.items.forEach(element => {
+        this.profileItemList.push(element);
+      });
     });
    }
 
-   findRepository(){
-    this.profileSearchService.getProfileRepos().subscribe(repos => {
+   findRepository(userName){
+    this.profileSearchService.getProfileRepos(userName).subscribe(repos => {
   		console.log(repos);
   		this.repos = repos;
   	})  
